@@ -1,0 +1,599 @@
+[
+ {
+  "card": "tripSplit",
+  "args": [
+   25,
+   7.5,
+   4
+  ],
+  "expect": {
+   "total": 30.0,
+   "per_person": 7.5,
+   "verdict": "pricey - check the route"
+  }
+ },
+ {
+  "card": "tripSplit",
+  "args": [
+   10,
+   6,
+   2
+  ],
+  "expect": {
+   "total": 9.6,
+   "per_person": 4.8,
+   "verdict": "a fair split"
+  }
+ },
+ {
+  "card": "tripSplit",
+  "args": [
+   40,
+   8.2,
+   3
+  ],
+  "expect": {
+   "total": 52.48,
+   "per_person": 17.49,
+   "verdict": "pricey - check the route"
+  }
+ },
+ {
+  "card": "tripSplit",
+  "args": [
+   5,
+   5.9,
+   2
+  ],
+  "expect": {
+   "total": 4.72,
+   "per_person": 2.36,
+   "verdict": "a fair split"
+  }
+ },
+ {
+  "card": "tripSplit",
+  "args": [
+   60,
+   9,
+   5
+  ],
+  "expect": {
+   "total": 86.4,
+   "per_person": 17.28,
+   "verdict": "pricey - check the route"
+  }
+ },
+ {
+  "card": "tripSplit",
+  "args": [
+   15,
+   7,
+   4
+  ],
+  "expect": {
+   "total": 16.8,
+   "per_person": 4.2,
+   "verdict": "a fair split"
+  }
+ },
+ {
+  "card": "tripSplit",
+  "args": [
+   100,
+   7,
+   6
+  ],
+  "expect": {
+   "total": 112.0,
+   "per_person": 18.67,
+   "verdict": "pricey - check the route"
+  }
+ },
+ {
+  "card": "tripSplit",
+  "args": [
+   30,
+   10.5,
+   2
+  ],
+  "expect": {
+   "total": 50.4,
+   "per_person": 25.2,
+   "verdict": "pricey - check the route"
+  }
+ },
+ {
+  "card": "tripSplit",
+  "args": [
+   12,
+   6.4,
+   3
+  ],
+  "expect": {
+   "total": 12.29,
+   "per_person": 4.1,
+   "verdict": "a fair split"
+  }
+ },
+ {
+  "card": "tripSplit",
+  "args": [
+   80,
+   12,
+   4
+  ],
+  "expect": {
+   "total": 153.6,
+   "per_person": 38.4,
+   "verdict": "pricey - check the route"
+  }
+ },
+ {
+  "card": "tripSplit",
+  "args": [
+   150,
+   8,
+   7
+  ],
+  "expect": {
+   "total": 192.0,
+   "per_person": 27.43,
+   "verdict": "pricey - check the route"
+  }
+ },
+ {
+  "card": "tripSplit",
+  "args": [
+   45,
+   7.9,
+   5
+  ],
+  "expect": {
+   "total": 56.88,
+   "per_person": 11.38,
+   "verdict": "pricey - check the route"
+  }
+ },
+ {
+  "card": "tripSplit",
+  "args": [
+   0,
+   7,
+   4
+  ],
+  "error": "positive"
+ },
+ {
+  "card": "tripSplit",
+  "args": [
+   25,
+   7,
+   1
+  ],
+  "error": "at least 2"
+ },
+ {
+  "card": "tripSplit",
+  "args": [
+   25,
+   7,
+   2.5
+  ],
+  "error": "whole people"
+ },
+ {
+  "card": "tripSplit",
+  "args": [
+   250,
+   7,
+   4
+  ],
+  "error": "under 200"
+ },
+ {
+  "card": "tripSplit",
+  "args": [
+   25,
+   25,
+   4
+  ],
+  "error": "under 20"
+ },
+ {
+  "card": "rotation",
+  "args": [
+   2,
+   1
+  ],
+  "expect": {
+   "drives": 5,
+   "min_drives": 2,
+   "max_drives": 3,
+   "verdict": "1 driver takes one extra day"
+  }
+ },
+ {
+  "card": "rotation",
+  "args": [
+   3,
+   3
+  ],
+  "expect": {
+   "drives": 15,
+   "min_drives": 5,
+   "max_drives": 5,
+   "verdict": "perfectly even"
+  }
+ },
+ {
+  "card": "rotation",
+  "args": [
+   4,
+   2
+  ],
+  "expect": {
+   "drives": 10,
+   "min_drives": 2,
+   "max_drives": 3,
+   "verdict": "2 drivers take one extra day"
+  }
+ },
+ {
+  "card": "rotation",
+  "args": [
+   5,
+   1
+  ],
+  "expect": {
+   "drives": 5,
+   "min_drives": 1,
+   "max_drives": 1,
+   "verdict": "perfectly even"
+  }
+ },
+ {
+  "card": "rotation",
+  "args": [
+   2,
+   4
+  ],
+  "expect": {
+   "drives": 20,
+   "min_drives": 10,
+   "max_drives": 10,
+   "verdict": "perfectly even"
+  }
+ },
+ {
+  "card": "rotation",
+  "args": [
+   6,
+   6
+  ],
+  "expect": {
+   "drives": 30,
+   "min_drives": 5,
+   "max_drives": 5,
+   "verdict": "perfectly even"
+  }
+ },
+ {
+  "card": "rotation",
+  "args": [
+   7,
+   7
+  ],
+  "expect": {
+   "drives": 35,
+   "min_drives": 5,
+   "max_drives": 5,
+   "verdict": "perfectly even"
+  }
+ },
+ {
+  "card": "rotation",
+  "args": [
+   3,
+   10
+  ],
+  "expect": {
+   "drives": 50,
+   "min_drives": 16,
+   "max_drives": 17,
+   "verdict": "2 drivers take one extra day"
+  }
+ },
+ {
+  "card": "rotation",
+  "args": [
+   4,
+   13
+  ],
+  "expect": {
+   "drives": 65,
+   "min_drives": 16,
+   "max_drives": 17,
+   "verdict": "1 driver takes one extra day"
+  }
+ },
+ {
+  "card": "rotation",
+  "args": [
+   5,
+   52
+  ],
+  "expect": {
+   "drives": 260,
+   "min_drives": 52,
+   "max_drives": 52,
+   "verdict": "perfectly even"
+  }
+ },
+ {
+  "card": "rotation",
+  "args": [
+   2,
+   26
+  ],
+  "expect": {
+   "drives": 130,
+   "min_drives": 65,
+   "max_drives": 65,
+   "verdict": "perfectly even"
+  }
+ },
+ {
+  "card": "rotation",
+  "args": [
+   6,
+   11
+  ],
+  "expect": {
+   "drives": 55,
+   "min_drives": 9,
+   "max_drives": 10,
+   "verdict": "1 driver takes one extra day"
+  }
+ },
+ {
+  "card": "rotation",
+  "args": [
+   1,
+   4
+  ],
+  "error": "at least 2"
+ },
+ {
+  "card": "rotation",
+  "args": [
+   3,
+   0
+  ],
+  "error": "positive"
+ },
+ {
+  "card": "rotation",
+  "args": [
+   2.5,
+   4
+  ],
+  "error": "whole people"
+ },
+ {
+  "card": "rotation",
+  "args": [
+   8,
+   4
+  ],
+  "error": "under 8"
+ },
+ {
+  "card": "rotation",
+  "args": [
+   4,
+   60
+  ],
+  "error": "under 53"
+ },
+ {
+  "card": "detour",
+  "args": [
+   25,
+   7.5,
+   3,
+   4
+  ],
+  "expect": {
+   "solo": 30.0,
+   "shared": 11.6,
+   "saving": 18.4,
+   "detour_min": 12.0,
+   "verdict": "a clear win"
+  }
+ },
+ {
+  "card": "detour",
+  "args": [
+   25,
+   7.5,
+   2,
+   4
+  ],
+  "expect": {
+   "solo": 30.0,
+   "shared": 17.4,
+   "saving": 12.6,
+   "detour_min": 12.0,
+   "verdict": "a clear win"
+  }
+ },
+ {
+  "card": "detour",
+  "args": [
+   10,
+   6,
+   2,
+   1
+  ],
+  "expect": {
+   "solo": 9.6,
+   "shared": 5.28,
+   "saving": 4.32,
+   "detour_min": 3.0,
+   "verdict": "worth the detour"
+  }
+ },
+ {
+  "card": "detour",
+  "args": [
+   40,
+   8,
+   4,
+   10
+  ],
+  "expect": {
+   "solo": 51.2,
+   "shared": 16.0,
+   "saving": 35.2,
+   "detour_min": 30.0,
+   "verdict": "a clear win"
+  }
+ },
+ {
+  "card": "detour",
+  "args": [
+   15,
+   7,
+   3,
+   0
+  ],
+  "expect": {
+   "solo": 16.8,
+   "shared": 5.6,
+   "saving": 11.2,
+   "detour_min": 0.0,
+   "verdict": "a clear win"
+  }
+ },
+ {
+  "card": "detour",
+  "args": [
+   60,
+   9,
+   5,
+   6
+  ],
+  "expect": {
+   "solo": 86.4,
+   "shared": 19.01,
+   "saving": 67.39,
+   "detour_min": 18.0,
+   "verdict": "a clear win"
+  }
+ },
+ {
+  "card": "detour",
+  "args": [
+   8,
+   5.5,
+   2,
+   2
+  ],
+  "expect": {
+   "solo": 7.04,
+   "shared": 4.4,
+   "saving": 2.64,
+   "detour_min": 6.0,
+   "verdict": "worth the detour"
+  }
+ },
+ {
+  "card": "detour",
+  "args": [
+   30,
+   10,
+   3,
+   8
+  ],
+  "expect": {
+   "solo": 48.0,
+   "shared": 20.27,
+   "saving": 27.73,
+   "detour_min": 24.0,
+   "verdict": "a clear win"
+  }
+ },
+ {
+  "card": "detour",
+  "args": [
+   50,
+   8.4,
+   4,
+   3
+  ],
+  "expect": {
+   "solo": 67.2,
+   "shared": 17.81,
+   "saving": 49.39,
+   "detour_min": 9.0,
+   "verdict": "a clear win"
+  }
+ },
+ {
+  "card": "detour",
+  "args": [
+   20,
+   7,
+   2,
+   12
+  ],
+  "expect": {
+   "solo": 22.4,
+   "shared": 17.92,
+   "saving": 4.48,
+   "detour_min": 36.0,
+   "verdict": "worth the detour"
+  }
+ },
+ {
+  "card": "detour",
+  "args": [
+   0,
+   7,
+   3,
+   4
+  ],
+  "error": "positive"
+ },
+ {
+  "card": "detour",
+  "args": [
+   25,
+   7,
+   1,
+   4
+  ],
+  "error": "at least 2"
+ },
+ {
+  "card": "detour",
+  "args": [
+   25,
+   7,
+   3,
+   -2
+  ],
+  "error": "zero or more"
+ },
+ {
+  "card": "detour",
+  "args": [
+   25,
+   7,
+   3,
+   60
+  ],
+  "error": "under 50"
+ }
+]
