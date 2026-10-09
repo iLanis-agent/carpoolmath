@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Carpool math - trip split, rotation planner, detour check</title>
+<style>
+  :root { --ink:#0f1c26; --accent:#1668a8; --paper:#eef4f9; --card:#ffffff; --line:#c8d9e6; }
+  * { box-sizing: border-box; }
+  body { margin:0; font-family: Georgia, 'Times New Roman', serif; background:var(--paper); color:var(--ink); }
+  header { padding:2rem 1.25rem 1rem; max-width:960px; margin:0 auto; }
+  h1 { font-size:1.9rem; margin:0 0 .35rem; }
+  header p { margin:.25rem 0; color:#2c4557; max-width:46rem; line-height:1.45; }
+  .norms { font-size:.9rem; color:#3a556b; margin-top:.6rem; }
+  main { max-width:960px; margin:0 auto; padding:0 1.25rem 3rem; display:grid; gap:1.25rem; }
+  @media (min-width:820px){ main { grid-template-columns:1fr 1fr 1fr; } }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:1.1rem 1.1rem 1.25rem; }
+  .card h2 { font-size:1.15rem; margin:.1rem 0 .5rem; }
+  .card p.desc { font-size:.9rem; color:#3a556b; margin:.2rem 0 .8rem; line-height:1.4; }
+  label { display:block; font-size:.85rem; margin:.55rem 0 .15rem; color:#243d4f; }
+  input, select { width:100%; padding:.45rem .5rem; font-size:1rem; border:1px solid var(--line); border-radius:6px; font-family:inherit; background:#fff; }
+  button { margin-top:.8rem; width:100%; padding:.55rem; font-size:1rem; font-family:inherit; background:var(--accent); color:#fff; border:0; border-radius:6px; cursor:pointer; }
+  button:hover { background:#0f5083; }
+  .out { margin-top:.9rem; font-size:.95rem; line-height:1.5; min-height:3.2rem; }
+  .out .big { font-size:1.35rem; font-weight:bold; }
+  .band { display:inline-block; margin-top:.35rem; padding:.15rem .55rem; border-radius:999px; background:#d3e5f2; color:#0f4c7c; font-size:.82rem; }
+  .err { color:#a02323; }
+  footer { max-width:960px; margin:0 auto; padding:0 1.25rem 2.5rem; font-size:.85rem; color:#54708a; }
+  a { color:var(--accent); }
+</style>
+</head>
+<body>
+<header>
+  <h1>Carpool math</h1>
+  <p>One car costs the same whether the seats are empty or full. Split the day's fuel honestly, keep the rotation fair, and settle the pickup detour. Exact arithmetic, every borrowed number labeled.</p>
+  <p class="norms">Labeled norms: consumption 8 L per 100 km, 5 workdays per week, detour speed 40 km/h. Money rounds to 2 decimals, minutes to 1.</p>
+</header>
+<main>
+  <section class="card" id="split">
+    <h2>Trip split</h2>
+    <p class="desc">Distance, fuel price and riders become the day's cost per person.</p>
+    <label for="s-km">One-way distance (km)</label>
+    <input id="s-km" type="number" step="1" min="1" value="25">
+    <label for="s-p">Fuel price (per liter)</label>
+    <input id="s-p" type="number" step="0.1" min="0" value="7.5">
+    <label for="s-r">Riders (including driver)</label>
+    <input id="s-r" type="number" step="1" min="2" value="4">
+    <button id="s-go">Split the day</button>
+    <div class="out" id="s-out"></div>
+  </section>
+
+  <section class="card" id="rot">
+    <h2>Rotation planner</h2>
+    <p class="desc">Drivers and weeks become drives each, and who takes the extra day.</p>
+    <label for="r-d">Drivers</label>
+    <input id="r-d" type="number" step="1" min="2" value="3">
+    <label for="r-w">Weeks</label>
+    <input id="r-w" type="number" step="1" min="1" value="3">
+    <button id="r-go">Plan the rotation</button>
+    <div class="out" id="r-out"></div>
+  </section>
+
+  <section class="card" id="det">
+    <h2>Detour check</h2>
+    <p class="desc">The pickup detour versus the saving: worth it or marginal.</p>
+    <label for="d-km">One-way distance (km)</label>
+    <input id="d-km" type="number" step="1" min="1" value="25">
+    <label for="d-p">Fuel price (per liter)</label>
+    <input id="d-p" type="number" step="0.1" min="0" value="7.5">
+    <label for="d-r">Riders (including driver)</label>
+    <input id="d-r" type="number" step="1" min="2" value="3">
+    <label for="d-x">Pickup detour (km one-way)</label>
+    <input id="d-x" type="number" step="1" min="0" value="4">
+    <button id="d-go">Check the detour</button>
+    <div class="out" id="d-out"></div>
+  </section>
+</main>
+<footer>
+  Built by the app factory. <a href="index.html">About</a> &middot; <a href="https://github.com/iLanis-agent/carpoolmath">Source</a>
+</footer>
+<script src="engine.js"></script>
+<script>
+(function () {
+  'use strict';
+  var M = window.CarpoolMath;
+  function $(id){ return document.getElementById(id); }
+  function num(id){ return parseFloat($(id).value); }
+  function show(el, html){ el.classList.remove('err'); el.innerHTML = html; }
+  function fail(el, msg){ el.classList.add('err'); el.textContent = msg; }
+
+  $('s-go').addEventListener('click', function () {
+    var out = $('s-out');
+    try {
+      var r = M.tripSplit(num('s-km'), num('s-p'), num('s-r'));
+      show(out, '<span class="big">' + r.per_person + '</span> per person' +
+        '<br>' + r.total + ' for the round trip' +
+        '<br><span class="band">' + r.verdict + '</span>');
+    } catch (e) { fail(out, e.message); }
+  });
+
+  $('r-go').addEventListener('click', function () {
+    var out = $('r-out');
+    try {
+      var r = M.rotation(num('r-d'), num('r-w'));
+      show(out, '<span class="big">' + r.min_drives + '-' + r.max_drives + '</span> drives each' +
+        '<br>' + r.drives + ' workdays in total' +
+        '<br><span class="band">' + r.verdict + '</span>');
+    } catch (e) { fail(out, e.message); }
+  });
+
+  $('d-go').addEventListener('click', function () {
+    var out = $('d-out');
+    try {
+      var r = M.detour(num('d-km'), num('d-p'), num('d-r'), num('d-x'));
+      show(out, 'save <span class="big">' + r.saving + '</span> a day' +
+        '<br>solo ' + r.solo + ' vs shared ' + r.shared + ', detour adds ' + r.detour_min + ' min' +
+        '<br><span class="band">' + r.verdict + '</span>');
+    } catch (e) { fail(out, e.message); }
+  });
+})();
+</script>
+</body>
+</html>
